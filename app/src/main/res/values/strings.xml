@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Week3AssessmentKey</string>
+    <string name="ok">OK</string>
+    <string name="class_info">Welcome, %1$s the %2$s!</string>
+    <string name="fate_of_world">The fate of the world is in your hands!!!!!!</string>
+    <string name="hero_textview_info">Welcome, %1$s the %2$s!!</string>
 </resources>

@@ -17,10 +17,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by rodneytressler on 12/14/17.
+ * Created by Cody Gividen on 12/14/17.
  */
 
 public class AccountFragment extends Fragment {
+    private ActivityCallback activityCallback;
 
     @BindView(R.id.name_input)
     protected EditText nameInput;
@@ -28,10 +29,6 @@ public class AccountFragment extends Fragment {
     @BindView(R.id.class_input)
     protected EditText classInput;
 
-    @OnClick(R.id.button_finish)
-    protected void onFinishButtonClicked(View view) {
-
-    }
 
 
 
@@ -52,24 +49,54 @@ public class AccountFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    @OnClick(R.id.button_finish)
+    protected void finishClicked(){
+        if(nameInput.getText().toString().isEmpty() || classInput.getText().toString().isEmpty()) {
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+            builder.setTitle("Missing Information")
+                    .setMessage("All Items are required!")
+                    .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
 
 
+        }else{
+            if(classInput.getText().toString().equalsIgnoreCase("mage")
+                    || classInput.getText().toString().equalsIgnoreCase("warrior")
+                    || classInput.getText().toString().equalsIgnoreCase("archer")) {
+                activityCallback.accountInformation(nameInput.getText().toString(),
+                        classInput.getText().toString());
+            }else{
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+                builder.setTitle("Wrong Class")
+                        .setMessage("Please put in a real class!! (mage, warrior, or archer)!")
+                        .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
 
-    private void showAlertDialog(String message) {
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog);
-        } else {
-            builder = new AlertDialog.Builder(getContext());
+            }
         }
-        builder.setTitle("Error")
-                .setMessage(message)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+            activityCallback.accountInformation(nameInput.getText().toString(),
+                    classInput.getText().toString());
+        }
+
+
+
+
+    public void attachParent(ActivityCallback activityCallback) {
+        this.activityCallback = activityCallback;
+    }
+    public interface ActivityCallback {
+        void accountInformation(String heroName, String heroClass);
     }
 }

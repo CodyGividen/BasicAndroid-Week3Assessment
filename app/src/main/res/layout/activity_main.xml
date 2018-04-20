@@ -17,14 +17,28 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/welcome_text"
+        android:id="@+id/hero_info_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginBottom="192dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/hero_textview_info"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/fate_world_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:layout_marginBottom="109dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginStart="162dp"
+        android:text="@string/fate_of_world"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_holder" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
